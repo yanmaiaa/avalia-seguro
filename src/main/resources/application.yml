@@ -1,2 +1,40 @@
-greeting:
-  message: "hello"
+openapi: 3.0.3
+info:
+  title: API para Análise de Reviews
+  version: 1.0.0
+  description: Analisa a confiabilidade de avaliações de produtos ou serviços.
+paths:
+  /avalia-seguro/avaliacao:
+    post:
+      summary: Analisa a avaliação enviada
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReviewRequest'
+      responses:
+        '200':
+          description: Resultado da análise com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReviewResponse'
+components:
+  schemas:
+    ReviewRequest:
+      type: object
+      properties:
+        texto:
+          type: string
+          example: "Produto excelente! Recomendo demais."
+    ReviewResponse:
+      type: object
+      properties:
+        nota:
+          type: integer
+          example: 80
+        justificativa:
+          type: string
+          example: "Texto parece confiável. Linguagem natural e coerente."
+
